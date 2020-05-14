@@ -28,10 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               onImageChange: (int a, int carouselIndex) {
                 setState(() {
-//                  print("CarouselIndex: Start");
-//                  print(carouselIndex);
-//                  print("CarouselIndex: End");
-
                   carouselIndexBottom = carouselIndex.toString() ?? '0';
 
                   bottomPage = ScreenBottom(consoleIndex: carouselIndexBottom);

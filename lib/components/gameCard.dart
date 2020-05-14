@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamesapp/essential/apiSearch.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class GameCard extends StatefulWidget {
   GameCard({this.gameData});
@@ -24,6 +25,7 @@ class _GameCardState extends State<GameCard> {
       } catch (e) {
         myCoverURL = widget.gameData['cover'];
         print(e);
+        print("HERE");
       }
     });
   }
@@ -40,40 +42,54 @@ class _GameCardState extends State<GameCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      margin: EdgeInsets.all(2),
-      color: Colors.white,
-      child: Row(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text(
-                widget.gameData['name'],
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.black,
+    try {
+      return Container(
+        height: 200,
+        margin: EdgeInsets.all(2),
+        color: Colors.white,
+        child: Row(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Text(
+                  widget.gameData['name'],
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              Text(
-                "${widget.gameData['rating'].round()}/100",
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.black,
+                Text(
+                  "${widget.gameData['rating'].round()}/100",
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              Text(
-                "$myCoverURL",
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.black,
-                ),
-              ),
-              Image.network('https://' + myCoverURL),
-            ],
-          ),
-        ],
-      ),
-    );
+//              Text(
+//                "$myCoverURL",
+//                style: TextStyle(
+//                  fontSize: 10,
+//                  color: Colors.black,
+//                ),
+//              ),
+                Image.network('https://' + myCoverURL),
+              ],
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      final spinkit = SpinKitWave(
+        itemBuilder: (BuildContext context, int index) {
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: index.isEven ? Colors.blue : Colors.white,
+            ),
+          );
+        },
+      );
+
+      return spinkit;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:gamesapp/essential/constant.dart';
+import 'package:gamesapp/essential/constants.dart';
 import 'package:gamesapp/essential/apiKey.dart';
 
 class APISearch {

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gamesapp/essential/constant.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:gamesapp/components/xboxBottom.dart';
-import 'package:gamesapp/components/psBottom.dart';
-import 'package:gamesapp/components/nintendoBottom.dart';
-import 'package:gamesapp/components/pcBottom.dart';
+import 'package:gamesapp/components/ScreenBottom.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,7 +9,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var timeScroll = Duration(seconds: 15);
-  Widget screenBottom = XboxBottom();
+  String carouselIndexBottom;
+  ScreenBottom bottomPage;
 
   @override
   Widget build(BuildContext context) {
@@ -25,26 +22,21 @@ class _MyHomePageState extends State<MyHomePage> {
             flex: 4,
             child: Carousel(
               autoplayDuration: Duration(seconds: 1500),
-              onImageTap: (int a) {
-                print(a);
+              onImageTap: (int consoleImage) {
+                print(consoleImage);
+//              Do something useful action when tapped later
               },
-              onImageChange: (int a, int b) {
+              onImageChange: (int a, int carouselIndex) {
                 setState(() {
-                  if (b == Console.xbox.index) {
-                    screenBottom = XboxBottom();
-                    timeScroll = Duration(seconds: 2500);
-                  } else if (b == Console.playstation.index) {
-                    screenBottom = PsBottom();
-                    timeScroll = Duration(seconds: 2500);
-                  } else if (b == Console.nintendo.index) {
-                    screenBottom = NintendoBottom();
-                    timeScroll = Duration(seconds: 2500);
-                  } else if (b == Console.pc.index) {
-                    screenBottom = PcBottom();
-                    timeScroll = Duration(seconds: 25);
-                  }
+//                  print("CarouselIndex: Start");
+//                  print(carouselIndex);
+//                  print("CarouselIndex: End");
+
+                  carouselIndexBottom = carouselIndex.toString() ?? '0';
+
+                  bottomPage = ScreenBottom(consoleIndex: carouselIndexBottom);
+                  timeScroll = Duration(seconds: 2500);
                 });
-                print("b: $b");
               },
               images: [
                 NetworkImage('https://i.imgur.com/C1ZaqHb.jpg'),
@@ -58,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            child: screenBottom,
+            child:
+                Center(child: ScreenBottom(consoleIndex: carouselIndexBottom)),
           ),
         ],
       ),

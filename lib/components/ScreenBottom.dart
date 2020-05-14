@@ -15,26 +15,52 @@ class ScreenBottom extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text("ok"),
-        Container(
-          color: Colors.red,
-          height: 50,
-          child: FlatButton(
-            child: Text(
-              consoleIndexValue(),
-              style: TextStyle(
-                color: Colors.white,
-              ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  color: Colors.red,
+                  height: 50,
+                  child: FlatButton(
+                    child: Text(
+                      "Search Games",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ConsoleScreen(
+                              consoleIndexValue: consoleIndexValue());
+                        }),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return ConsoleScreen(consoleIndexValue: consoleIndexValue());
-                }),
-              );
-            },
-          ),
+            Column(
+              children: <Widget>[
+                Container(
+                  color: Colors.red,
+                  height: 50,
+                  child: FlatButton(
+                    child: Text(
+                      "Last IGN News",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConsoleScreen extends StatefulWidget {
@@ -20,58 +21,51 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     return Column(
       children: <Widget>[
         Expanded(
-          child: Container(
-            color: Colors.black12,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: <Widget>[
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                  ),
-                ],
+          flex: 2,
+          child: SafeArea(
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(15),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 4,
+                      child: Material(
+                        child: Center(
+                          child: Container(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search games',
+//                                Add Console games here
+                                border: const OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 60,
+                        color: Colors.redAccent,
+                        child: FlatButton(
+                          child: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
         Expanded(
+          flex: 8,
           child: Container(
             color: Colors.white,
             child: Center(
@@ -80,18 +74,57 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
           ),
         ),
         Expanded(
+          flex: 2,
           child: Container(
-            color: Colors.white,
+            color: Colors.black54,
             child: Center(
-              child: Text("OK"),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.white,
-            child: Center(
-              child: Text("OK"),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: <Widget>[
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                    CircleAvatar(
+                      maxRadius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

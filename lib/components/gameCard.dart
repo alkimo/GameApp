@@ -35,13 +35,11 @@ class _GameCardState extends State<GameCard> {
     }
 
     apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
-
     getData();
   }
 
   void getData() async {
     myGameList = await apiSearch.requestData();
-    print(myGameList);
   }
 
   @override
@@ -59,7 +57,21 @@ class _GameCardState extends State<GameCard> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Center(child: Text("ok")),
+                    Expanded(
+                      child: Container(
+                        child: Center(
+                          child: Text("Image Half"),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: Center(
+                          child: Text("Info Half"),
+                        ),
+                      ),
+                    ),
+//                    Center(child: Text(myGameList[0]['name'])),
                   ],
                 ),
               ),

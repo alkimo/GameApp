@@ -16,6 +16,8 @@ class _GameCardState extends State<GameCard> {
   String consoleName;
   APISearch apiSearch;
   List myGameList;
+  String myGameName = 'wtf';
+  String myGameUrl = 'wtf';
 
   @override
   void initState() {
@@ -34,12 +36,19 @@ class _GameCardState extends State<GameCard> {
       consoleApiCode = pcApiCode;
     }
 
-    apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
     getData();
   }
 
   void getData() async {
+    apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
     myGameList = await apiSearch.requestData();
+
+    setState(() {
+      myGameName = myGameList[0]['name'];
+      myGameUrl = myGameList[0]['url'];
+    });
+
+    print(myGameName);
   }
 
   @override
@@ -60,14 +69,14 @@ class _GameCardState extends State<GameCard> {
                     Expanded(
                       child: Container(
                         child: Center(
-                          child: Text("Image Half"),
+                          child: Text(myGameUrl),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Container(
                         child: Center(
-                          child: Text("Info Half"),
+                          child: Text(myGameName),
                         ),
                       ),
                     ),

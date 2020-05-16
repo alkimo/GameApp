@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gamesapp/components/circleGenre.dart';
+import 'package:gamesapp/components/topSearchBar.dart';
 
 class ConsoleScreen extends StatefulWidget {
   ConsoleScreen({this.consoleIndexValue});
@@ -20,108 +22,50 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        TopSearchBar(),
         Expanded(
-          flex: 2,
-          child: SafeArea(
-            child: Container(
-              color: Colors.white,
-              padding: EdgeInsets.all(15),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 4,
-                      child: Material(
-                        child: Center(
-                          child: Container(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search games',
-//                                Add Console games here
-                                border: const OutlineInputBorder(),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 60,
-                        color: Colors.redAccent,
-                        child: FlatButton(
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+          flex: 4,
+          child: Container(
+            color: Colors.white12,
+            child: Center(
+              child: Text("Popular"),
             ),
           ),
         ),
         Expanded(
-          flex: 8,
+          flex: 4,
+          child: Container(
+            color: Colors.white12,
+            child: Center(
+              child: Text("New"),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
           child: Container(
             color: Colors.white,
-            child: Center(
-              child: Text("OK"),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: Colors.black54,
             child: Center(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
-                    CircleAvatar(
-                      maxRadius: 30,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1506/PNG/512/emblemok_103757.png'),
-                    ),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
+                    CircleGenre(),
                   ],
                 ),
               ),

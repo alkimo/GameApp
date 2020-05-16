@@ -12,9 +12,11 @@ class ConsoleScreen extends StatefulWidget {
 }
 
 class _ConsoleScreenState extends State<ConsoleScreen> {
+  String myIndex;
+
   @override
   void initState() {
-    print(widget.consoleIndexValue);
+    myIndex = widget.consoleIndexValue;
     super.initState();
   }
 
@@ -28,7 +30,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
           child: Container(
             color: Colors.white12,
             child: Center(
-              child: Text("Popular"),
+              child: Text(myIndex),
             ),
           ),
         ),
@@ -37,7 +39,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
           child: Container(
             color: Colors.white12,
             child: Center(
-              child: Text("New"),
+              child: Text(myIndex),
             ),
           ),
         ),

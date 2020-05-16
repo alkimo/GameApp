@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gamesapp/components/circleGenre.dart';
 import 'package:gamesapp/components/topSearchBar.dart';
+import 'package:gamesapp/components/gameCard.dart';
 
 class ConsoleScreen extends StatefulWidget {
   ConsoleScreen({this.consoleIndexValue});
@@ -23,26 +24,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         TopSearchBar(),
-        Expanded(
-          flex: 4,
-          child: Container(
-            color: Colors.white12,
-            child: Center(
-              child: Text(myIndex),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 4,
-          child: Container(
-            color: Colors.white12,
-            child: Center(
-              child: Text(myIndex),
-            ),
-          ),
-        ),
+        GameCard(consoleIndex: myIndex),
+        GameCard(consoleIndex: myIndex),
         Expanded(
           flex: 1,
           child: Container(

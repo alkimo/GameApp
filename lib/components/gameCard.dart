@@ -11,14 +11,32 @@ class GameCard extends StatefulWidget {
 }
 
 class _GameCardState extends State<GameCard> {
-  int gameIndex;
+  int consoleIndexGameCardInput;
+  int consoleApiCode;
+  String consoleName;
+  APISearch apiSearch;
 
   @override
   void initState() {
     super.initState();
-    gameIndex = int.parse(widget.consoleIndex);
-    print(gameIndex);
+
+    consoleIndexGameCardInput = int.parse(widget.consoleIndex);
+    consoleName = Console.values[consoleIndexGameCardInput].toString();
+
+    if (consoleName == 'Console.playstation') {
+      consoleApiCode = ps4ApiCode;
+    } else if (consoleName == 'Console.xbox') {
+      consoleApiCode = xboxApiCode;
+    } else if (consoleName == 'Console.switch') {
+      consoleApiCode = switchApiCode;
+    } else if (consoleName == 'Console.pc') {
+      consoleApiCode = pcApiCode;
+    }
+
+    apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
   }
+
+  void getData() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +45,7 @@ class _GameCardState extends State<GameCard> {
       child: Container(
         color: Colors.white12,
         child: Center(
-          child: Text(Console.values[gameIndex].toString()),
+          child: Text("Holder"),
         ),
       ),
     );

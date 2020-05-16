@@ -15,6 +15,7 @@ class _GameCardState extends State<GameCard> {
   int consoleApiCode;
   String consoleName;
   APISearch apiSearch;
+  List myGameList;
 
   @override
   void initState() {
@@ -34,19 +35,37 @@ class _GameCardState extends State<GameCard> {
     }
 
     apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
+
+    getData();
   }
 
-  void getData() async {}
+  void getData() async {
+    myGameList = await apiSearch.requestData();
+    print(myGameList);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 4,
-      child: Container(
-        color: Colors.white12,
-        child: Center(
-          child: Text("Holder"),
-        ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Material(
+              child: Container(
+                color: Colors.black12,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Center(child: Text("ok")),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

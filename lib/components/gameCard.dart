@@ -25,11 +25,11 @@ class _GameCardState extends State<GameCard> {
   String myGamePopularity = '';
   String myGameSummary = '';
 
-  final spinkit = SpinKitDoubleBounce(
+  final spinkit = SpinKitFadingCircle(
     itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(
         decoration: BoxDecoration(
-          color: index.isEven ? Colors.blueGrey : Colors.blue,
+          color: index.isEven ? Colors.white : Colors.white,
         ),
       );
     },
@@ -81,36 +81,37 @@ class _GameCardState extends State<GameCard> {
             child: Material(
               child: Container(
                 color: Colors.black12,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        child: Center(
-                          child: myGameCoverId == ''
-                              ? spinkit
-                              : Text(myGameCoverId),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              myGameName == '' ? spinkit : Text(myGameName),
-                              Text(myGameRating),
-                              Text(myGamePopularity),
-                              Text(myGameSummary),
-                            ],
+                child: myGameName == ''
+                    ? spinkit
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              child: Center(
+                                child: Text(myGameCoverId),
+                              ),
+                            ),
                           ),
-                        ),
+                          Expanded(
+                            child: Container(
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Text(myGameName),
+                                    Text(myGameRating),
+                                    Text(myGamePopularity),
+                                    Text(myGameSummary),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
               ),
             ),
           ),

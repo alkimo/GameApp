@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gamesapp/components/circleGenre.dart';
 import 'package:gamesapp/components/topSearchBar.dart';
 import 'package:gamesapp/components/gameCard.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:gamesapp/essential/apiSearch.dart';
 
 class ConsoleScreen extends StatefulWidget {
   ConsoleScreen({this.consoleIndexValue});

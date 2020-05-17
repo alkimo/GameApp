@@ -11,12 +11,12 @@ class APISearch {
 
   APISearch({this.platformCode, this.coverCode});
 
-  Future<List> requestData() async {
+  Future<List> requestDataTopRated() async {
     var response = await http.post(
       url,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 100; sort rating desc;',
+          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 5; sort rating desc;',
     );
     gameList = await jsonDecode(response.body);
     return gameList;

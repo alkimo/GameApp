@@ -24,12 +24,13 @@ class _GameCardState extends State<GameCard> {
   String myGameRating = '';
   String myGamePopularity = '';
   String myGameSummary = '';
+  var myCoverURLRequest;
 
   final spinkit = SpinKitFadingCircle(
     itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(
         decoration: BoxDecoration(
-          color: index.isEven ? Colors.white : Colors.white,
+          color: Colors.white,
         ),
       );
     },
@@ -57,7 +58,11 @@ class _GameCardState extends State<GameCard> {
 
   void getData() async {
     apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
-    myGameList = await apiSearch.requestData();
+    myGameList = await apiSearch.requestDataTopRated();
+
+    myGameCoverId = myGameList[0]['cover'].toString();
+    myCoverURLRequest = await apiSearch.getCover(myGameCoverId);
+    print(myCoverURLRequest[0]);
 
     setState(() {
       myGameName = myGameList[0]['name'];
@@ -65,9 +70,11 @@ class _GameCardState extends State<GameCard> {
       myGameRating = myGameList[0]['rating'].toString();
       myGamePopularity = myGameList[0]['popularity'].toString();
       myGameSummary = myGameList[0]['summary'].toString();
+      myGameCoverId = 'https://' +
+          myCoverURLRequest[0]['url'].substring(2, 36) +
+          't_cover_big' +
+          myCoverURLRequest[0]['url'].substring(43);
     });
-
-    print(myGameList[0]);
   }
 
   @override
@@ -81,22 +88,20 @@ class _GameCardState extends State<GameCard> {
             child: Material(
               child: Container(
                 color: Colors.black12,
-                child: myGameName == ''
+                child: myGameCoverId == ''
                     ? spinkit
-                    : Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              child: Center(
-                                child: Text(myGameCoverId),
-                              ),
+                    : Card(
+                        margin: EdgeInsets.all(15),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              child: Image.network(myGameCoverId,
+                                  fit: BoxFit.fill),
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              child: Center(
+                            Expanded(
+                              child: Container(
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -109,8 +114,8 @@ class _GameCardState extends State<GameCard> {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
               ),
             ),

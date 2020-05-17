@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gamesapp/essential/constants.dart';
 import 'package:gamesapp/essential/apiSearch.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class GameCard extends StatefulWidget {
   GameCard({this.consoleIndex});
@@ -16,8 +18,22 @@ class _GameCardState extends State<GameCard> {
   String consoleName;
   APISearch apiSearch;
   List myGameList;
-  String myGameName = 'wtf';
-  String myGameUrl = 'wtf';
+
+  String myGameCoverId = '';
+  String myGameName = '';
+  String myGameRating = '';
+  String myGamePopularity = '';
+  String myGameSummary = '';
+
+  final spinkit = SpinKitDoubleBounce(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          color: index.isEven ? Colors.blueGrey : Colors.blue,
+        ),
+      );
+    },
+  );
 
   @override
   void initState() {
@@ -45,10 +61,13 @@ class _GameCardState extends State<GameCard> {
 
     setState(() {
       myGameName = myGameList[0]['name'];
-      myGameUrl = myGameList[0]['url'];
+      myGameCoverId = myGameList[0]['cover'].toString();
+      myGameRating = myGameList[0]['rating'].toString();
+      myGamePopularity = myGameList[0]['popularity'].toString();
+      myGameSummary = myGameList[0]['summary'].toString();
     });
 
-    print(myGameName);
+    print(myGameList[0]);
   }
 
   @override
@@ -69,18 +88,27 @@ class _GameCardState extends State<GameCard> {
                     Expanded(
                       child: Container(
                         child: Center(
-                          child: Text(myGameUrl),
+                          child: myGameCoverId == ''
+                              ? spinkit
+                              : Text(myGameCoverId),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Container(
                         child: Center(
-                          child: Text(myGameName),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              myGameName == '' ? spinkit : Text(myGameName),
+                              Text(myGameRating),
+                              Text(myGamePopularity),
+                              Text(myGameSummary),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-//                    Center(child: Text(myGameList[0]['name'])),
                   ],
                 ),
               ),

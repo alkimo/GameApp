@@ -16,7 +16,7 @@ class APISearch {
       url,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 30; sort rating desc;',
+          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 100; sort rating desc;',
     );
     gameList = await jsonDecode(response.body);
     return gameList;
@@ -30,12 +30,15 @@ class APISearch {
       date,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where game.platforms = $platformCode & date > $lastYear; limit 100; sort rating desc;',
+          'fields *; where game.platforms = $platformCode & date > $lastYear; limit 300;',
     );
 
     gameList = await jsonDecode(response.body);
 
-    gameList.forEach((element) async {
+    gameList = gameList.toSet().toList();
+    print('Inside 1:' + gameList.length.toString());
+
+    gameList.forEach((element) {
       idList.add(element['game']);
     });
 
@@ -49,7 +52,7 @@ class APISearch {
     var listResponse = await http.post(
       url,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
-      body: 'fields *; where id = $myIdListInStr;',
+      body: 'fields *; where id = $myIdListInStr; limit 300; sort date desc;',
     );
 
     gameList = await jsonDecode(listResponse.body);

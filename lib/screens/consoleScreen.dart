@@ -57,6 +57,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     gameListByRating = await apiSearch.requestDataTopRated();
     gameListRecent = await apiSearch.requestDataLatest();
 
+    print("Hmm");
+    print(gameListByRating.length);
+    print(gameListRecent.length);
+    print("Hmm");
+
     addGameRatingDataToList();
     addGameRecentDataToList();
   }
@@ -86,7 +91,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
 
   void addGameRecentDataToList() async {
     print("* * * Inside addGameRecentData * * *");
-//    print(gameListRecent);
+    print(gameListRecent.length);
     gameListRecent.forEach(
       (game) async {
         print(game['name']);

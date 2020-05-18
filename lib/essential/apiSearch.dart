@@ -16,20 +16,43 @@ class APISearch {
       url,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 100; sort rating desc;',
+          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 30; sort rating desc;',
     );
     gameList = await jsonDecode(response.body);
     return gameList;
   }
 
   Future<List> requestDataLatest() async {
+    var idList = [];
+    String myIdListInStr;
+    var lastYear = getTime();
     var response = await http.post(
       date,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where platforms = $platformCode & cover != n &; limit 100; sort rating desc;',
+          'fields *; where game.platforms = $platformCode & date > $lastYear; limit 100; sort rating desc;',
     );
+
     gameList = await jsonDecode(response.body);
+
+    gameList.forEach((element) async {
+      idList.add(element['game']);
+    });
+
+    print(idList.length);
+    myIdListInStr = "(" +
+        idList.toString().substring(1, idList.toString().length - 1) +
+        ")";
+
+    print(myIdListInStr);
+
+    var listResponse = await http.post(
+      url,
+      headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+      body: 'fields *; where id = $myIdListInStr;',
+    );
+
+    gameList = await jsonDecode(listResponse.body);
     return gameList;
   }
 
@@ -41,5 +64,9 @@ class APISearch {
     );
     stringURL = await jsonDecode(response.body);
     return stringURL;
+  }
+
+  String getTime() {
+    return '1558137600';
   }
 }

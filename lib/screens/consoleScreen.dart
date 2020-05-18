@@ -21,8 +21,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
   String consoleName;
   int consoleApiCode;
   APISearch apiSearch;
-  List gameRequestData;
-  List<GameCard> gameCardList = [];
+  List gameListByRating;
+  List gameListRecent;
+  List<GameCard> gameRatingCardList = [];
+  List<GameCard> gameRecentCardList = [];
+
   var a;
   GameCard b;
 
@@ -46,18 +49,20 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
       consoleApiCode = pcApiCode;
     }
 
-//    print('$consoleName: ' + consoleApiCode.toString());
     getData();
   }
 
   void getData() async {
     apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
-    gameRequestData = await apiSearch.requestDataTopRated();
-    addDataToList();
+    gameListByRating = await apiSearch.requestDataTopRated();
+    gameListRecent = await apiSearch.requestDataLatest();
+
+    addGameRatingDataToList();
+    addGameRecentDataToList();
   }
 
-  void addDataToList() async {
-    gameRequestData.forEach(
+  void addGameRatingDataToList() async {
+    gameListByRating.forEach(
       (game) async {
         tempVar = await apiSearch.getCover(game['cover']);
 
@@ -67,16 +72,50 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
             tempVar[0]['url'].substring(43);
 
         b = GameCard(
-            name: game['name'],
-            rating: game['rating'],
-            summary: game['summary'],
+            name: game['name'] == null ? 'nothing' : game['name'],
+            rating: game['rating'] == null ? 'nothing' : game['rating'],
+            summary: game['summary'] == null ? 'nothing' : game['summary'],
             coverURL: a);
 
         setState(() {
-          gameCardList.add(b);
+          gameRatingCardList.add(b);
         });
       },
     );
+  }
+
+  void addGameRecentDataToList() async {
+    print("* * * Inside addGameRecentData * * *");
+//    print(gameListRecent);
+    gameListRecent.forEach(
+      (game) async {
+        print(game['name']);
+        tempVar = await apiSearch.getCover(game['cover']);
+
+        print(tempVar == null ? tempVar : 'No Covers');
+
+        if (tempVar.length != 0) {
+          a = 'https://' +
+              tempVar[0]['url'].substring(2, 36) +
+              't_720p' +
+              tempVar[0]['url'].substring(43);
+        } else {
+          a = 'https://geodis.com/br/sites/default/files/styles/max_800x800/public/2018-06/404.png';
+        }
+
+        b = GameCard(
+            name: game['name'] == null ? 'nothing' : game['name'],
+            rating:
+                game['rating'].toString() == null ? 'nothing' : game['rating'],
+            summary: game['summary'] == null ? 'nothing' : game['summary'],
+            coverURL: a);
+
+        setState(() {
+          gameRecentCardList.add(b);
+        });
+      },
+    );
+    print("* * * Outside addGameRecentData * * *");
   }
 
   @override
@@ -92,10 +131,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
               autoPlay: true,
               autoPlayInterval: Duration(seconds: 3),
               height: double.infinity,
+              enableInfiniteScroll: true,
               enlargeCenterPage: true,
               viewportFraction: 1,
             ),
-            items: gameCardList.map((item) => item).toList(),
+            items: gameRatingCardList.map((item) => item).toList(),
           ),
         ),
         Expanded(
@@ -105,10 +145,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
               autoPlay: true,
               height: double.infinity,
               enlargeCenterPage: true,
+              enableInfiniteScroll: true,
               viewportFraction: 1,
               autoPlayInterval: Duration(seconds: 6),
             ),
-            items: gameCardList.map((item) => item).toList(),
+            items: gameRecentCardList.map((item) => item).toList(),
           ),
         ),
         Expanded(

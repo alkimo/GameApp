@@ -39,12 +39,17 @@ class _GameCardState extends State<GameCard> {
                       ),
                       Expanded(
                         child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          child: ListView(
                             children: <Widget>[
-                              Text(widget.name),
-                              Text(widget.rating.toString()),
-                              Text(widget.summary),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Text(widget.name),
+                                  Text(widget.rating.toString()),
+                                  Text(widget.summary),
+                                ],
+                              )
                             ],
                           ),
                         ),

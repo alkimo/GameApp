@@ -6,7 +6,7 @@ class TopSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 3,
+      flex: 2,
       child: SafeArea(
         child: Container(
           color: Colors.white,

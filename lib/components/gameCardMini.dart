@@ -15,7 +15,6 @@ class GameCardMini extends StatefulWidget {
 
 class _GameCardMiniState extends State<GameCardMini> {
   @override
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
@@ -32,9 +31,7 @@ class _GameCardMiniState extends State<GameCardMini> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
-                        child:
-                            Image.network(widget.coverURL, fit: BoxFit.fill) ??
-                                LoadingAnimation(),
+                        child: Image.network(widget.coverURL, fit: BoxFit.fill),
                       ),
                     ],
                   ),

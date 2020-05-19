@@ -5,7 +5,7 @@ class BottomGenreSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 1,
       child: Container(
         color: Colors.white,
         child: Center(

@@ -129,7 +129,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
           height: 4,
         ),
         Expanded(
-          flex: 5,
+          flex: 4,
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
@@ -142,8 +142,75 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
             items: gameRatingCardList.map((item) => item).toList(),
           ),
         ),
+        SizedBox(
+          height: 5,
+        ),
         Expanded(
-          flex: 8,
+          flex: 1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  child: Material(
+                    color: Colors.redAccent,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Exclusive Games",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  child: Material(
+                    color: Colors.redAccent,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Exclusive Games",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 7,
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
@@ -154,6 +221,42 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
               autoPlayInterval: Duration(seconds: 6),
             ),
             items: gameRecentCardList.map((item) => item).toList(),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 3),
+                  child: Material(
+                    color: Colors.redAccent,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Exclusive Games",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         BottomGenreSelector(),

@@ -16,7 +16,7 @@ class APISearch {
       url,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 100; sort rating desc;',
+          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 5; sort rating desc;',
     );
     gameList = await jsonDecode(response.body);
     return gameList;
@@ -30,7 +30,7 @@ class APISearch {
       date,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where game.platforms = $platformCode & date > $lastYear; limit 300;',
+          'fields *; where game.platforms = $platformCode & date > $lastYear; limit 5;',
     );
 
     gameList = await jsonDecode(response.body);

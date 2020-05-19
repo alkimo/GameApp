@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TopSearchBar extends StatelessWidget {
+  double uniHeight = 50;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 3,
       child: SafeArea(
         child: Container(
           color: Colors.white,
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.symmetric(horizontal: 25),
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -16,18 +18,21 @@ class TopSearchBar extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: Material(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search games',
+                    child: Container(
+                      height: uniHeight,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search games',
 //                                Add Console games here
-                        border: const OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    height: 60,
+                    height: uniHeight,
                     child: FlatButton(
                       disabledColor: Colors.redAccent,
                       child: Icon(

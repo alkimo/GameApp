@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gamesapp/components/circleGenre.dart';
-import 'package:gamesapp/components/loadingAnimation.dart';
+import 'package:gamesapp/components/bottomGenreSelector.dart';
 import 'package:gamesapp/components/topSearchBar.dart';
 import 'package:gamesapp/components/gameCard.dart';
+import 'package:gamesapp/components/gameCardMini.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gamesapp/essential/apiSearch.dart';
 import 'package:gamesapp/essential/constants.dart';
+import 'package:gamesapp/components/loadingAnimation.dart';
 
 class ConsoleScreen extends StatefulWidget {
   ConsoleScreen({this.consoleIndexValue});
@@ -23,11 +24,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
   APISearch apiSearch;
   List gameListByRating;
   List gameListRecent;
-  List<GameCard> gameRatingCardList = [];
+  List<GameCardMini> gameRatingCardList = [];
   List<GameCard> gameRecentCardList = [];
 
   var a;
-  GameCard b;
+  var b;
 
   var tempVar;
 
@@ -57,10 +58,8 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     gameListByRating = await apiSearch.requestDataTopRated();
     gameListRecent = await apiSearch.requestDataLatest();
 
-    print("Hmm");
     print(gameListByRating.length);
     print(gameListRecent.length);
-    print("Hmm");
 
     addGameRatingDataToList();
     addGameRecentDataToList();
@@ -76,10 +75,9 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
             't_720p' +
             tempVar[0]['url'].substring(43);
 
-        b = GameCard(
+        b = GameCardMini(
             name: game['name'] == null ? 'nothing' : game['name'],
             rating: game['rating'] == null ? 'nothing' : game['rating'],
-            summary: game['summary'] == null ? 'nothing' : game['summary'],
             coverURL: a);
 
         setState(() {
@@ -90,7 +88,6 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
   }
 
   void addGameRecentDataToList() async {
-    print("* * * Inside addGameRecentData * * *");
     print(gameListRecent.length);
     gameListRecent.forEach(
       (game) async {
@@ -120,7 +117,6 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
         });
       },
     );
-    print("* * * Outside addGameRecentData * * *");
   }
 
   @override
@@ -129,8 +125,11 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         TopSearchBar(),
+        SizedBox(
+          height: 4,
+        ),
         Expanded(
-          flex: 3,
+          flex: 5,
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
@@ -138,13 +137,13 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
               height: double.infinity,
               enableInfiniteScroll: true,
               enlargeCenterPage: true,
-              viewportFraction: 1,
+              viewportFraction: 0.3,
             ),
             items: gameRatingCardList.map((item) => item).toList(),
           ),
         ),
         Expanded(
-          flex: 4,
+          flex: 8,
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
@@ -157,37 +156,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
             items: gameRecentCardList.map((item) => item).toList(),
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Container(
-            color: Colors.white,
-            child: Center(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                    CircleGenre(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+        BottomGenreSelector(),
       ],
     );
   }

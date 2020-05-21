@@ -1,16 +1,11 @@
-# gamesapp
+# GameApp
 
-A new Flutter application.
+First personal project using Flutter.
 
-## Getting Started
+## IGDB API
+This project uses the https://www.igdb.com/ API.
+A little personal project to practice Flutter fundamentals.
 
-This project is a starting point for a Flutter application.
+With it, you can search for games in the Nintendo Switch, Xbox One, Ps4 and PC platforms.
+Using text as an input, or just clicking a button.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

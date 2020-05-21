@@ -8,6 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gamesapp/essential/apiSearch.dart';
 import 'package:gamesapp/essential/constants.dart';
 import 'package:gamesapp/components/loadingAnimation.dart';
+import 'package:gamesapp/screens/SearchByButtonScreen.dart';
 
 class ConsoleScreen extends StatefulWidget {
   ConsoleScreen({this.consoleIndexValue});
@@ -148,8 +149,15 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                  child: Material(
+                  child: FlatButton(
                     color: Colors.redAccent,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchByButtonScreen(),
+                          ));
+                    },
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -176,8 +184,15 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                  child: Material(
+                  child: FlatButton(
                     color: Colors.redAccent,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchByButtonScreen(),
+                          ));
+                    },
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -224,10 +239,17 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 3),
-                  child: Material(
-                    color: Colors.redAccent,
+                child: FlatButton(
+                  color: Colors.redAccent,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SearchByButtonScreen(),
+                        ));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 3),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

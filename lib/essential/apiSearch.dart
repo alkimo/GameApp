@@ -65,7 +65,18 @@ class APISearch {
       url,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; search \"$searchString\"; where platforms = ($platformCode) & version_parent = null; limit 50;',
+          'fields *; search \"$searchString\"; where platforms = ($platformCode) & version_parent = null;  limit 50;',
+    );
+    gameList = await jsonDecode(response.body);
+    return gameList;
+  }
+
+  Future<List> requestDataByButton() async {
+    var response = await http.post(
+      url,
+      headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+      body:
+          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 5;',
     );
     gameList = await jsonDecode(response.body);
     return gameList;

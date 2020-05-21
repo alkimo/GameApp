@@ -31,7 +31,7 @@ class APISearch {
       date,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where game.platforms = $platformCode & date > $lastYear; limit 5;',
+          'fields *; where game.platforms = $platformCode & version_parent = null & game.cover != n & date < 1590030239 & date > $lastYear; limit 5;',
     );
 
     gameList = await jsonDecode(response.body);
@@ -71,15 +71,70 @@ class APISearch {
     return gameList;
   }
 
-  Future<List> requestDataByButton() async {
-    var response = await http.post(
-      url,
-      headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
-      body:
-          'fields *; where rating >= 70 & platforms = $platformCode & cover != n; limit 5;',
-    );
-    gameList = await jsonDecode(response.body);
-    return gameList;
+  Future<List> requestDataByButton(int searchCode) async {
+    String bodySearch = '';
+    var response;
+    if (searchCode == 1) {
+      bodySearch =
+          'fields *; where rating >= 70 & platforms = ($platformCode) & cover != n & version_parent = null; limit 30; sort rating desc;';
+
+      response = await http.post(
+        url,
+        headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+        body: bodySearch,
+      );
+
+      gameList = await jsonDecode(response.body);
+      return gameList;
+    } else if (searchCode == 2) {
+      bodySearch =
+          'fields *; where platforms !=n & platforms = {$platformCode} & rating >= 70 & cover != n & version_parent = null; limit 30; sort rating desc;';
+
+      response = await http.post(
+        url,
+        headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+        body: bodySearch,
+      );
+      gameList = await jsonDecode(response.body);
+      return gameList;
+    } else if (searchCode == 3) {
+      var idList = [];
+      String myIdListInStr;
+      var lastYear = getTime();
+      bodySearch =
+          'fields *; where game.platforms = {$platformCode} & version_parent = null & date > 1558396800 & date < 1590030239; limit 30; sort date desc;';
+
+      response = await http.post(
+        date,
+        headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+        body: bodySearch,
+//            'fields *; where game.platforms = $platformCode & date > $lastYear; limit 30;',
+      );
+
+      gameList = await jsonDecode(response.body);
+
+      gameList = gameList.toSet().toList();
+      print('Inside 1:' + gameList.length.toString());
+
+      gameList.forEach((element) {
+        idList.add(element['game']);
+      });
+
+      print(idList.length);
+      myIdListInStr = "(" +
+          idList.toString().substring(1, idList.toString().length - 1) +
+          ")";
+
+      print(myIdListInStr);
+
+      var listResponse = await http.post(
+        url,
+        headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+        body: 'fields *; where id = $myIdListInStr; limit 300; sort date desc;',
+      );
+      gameList = await jsonDecode(listResponse.body);
+      return gameList;
+    }
   }
 
   Future<dynamic> getCover(var coverCode) async {

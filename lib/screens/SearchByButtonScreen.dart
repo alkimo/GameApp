@@ -5,9 +5,8 @@ import 'package:gamesapp/components/gameCardMini.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class SearchByButtonScreen extends StatefulWidget {
-  SearchByButtonScreen({this.input, this.consoleIndex, this.buttonSearchIndex});
+  SearchByButtonScreen({this.consoleIndex, this.buttonSearchIndex});
 
-  final String input;
   final int consoleIndex;
   final int buttonSearchIndex;
 
@@ -30,7 +29,7 @@ class _SearchByButtonScreenState extends State<SearchByButtonScreen> {
   }
 
   void getTextSearchData(var apiRequest) async {
-    myRequest = await apiRequest.requestDataByButton();
+    myRequest = await apiRequest.requestDataByButton(widget.buttonSearchIndex);
 
     myRequest.forEach((game) async {
       gameCover = await apiRequest.getCover(game['cover']);

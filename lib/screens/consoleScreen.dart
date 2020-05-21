@@ -155,7 +155,9 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SearchByButtonScreen(),
+                            builder: (context) => SearchByButtonScreen(
+                                consoleIndex: consoleApiCode,
+                                buttonSearchIndex: 1),
                           ));
                     },
                     child: Center(
@@ -190,7 +192,9 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SearchByButtonScreen(),
+                            builder: (context) => SearchByButtonScreen(
+                                consoleIndex: consoleApiCode,
+                                buttonSearchIndex: 2),
                           ));
                     },
                     child: Center(
@@ -245,7 +249,9 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SearchByButtonScreen(),
+                          builder: (context) => SearchByButtonScreen(
+                              consoleIndex: consoleApiCode,
+                              buttonSearchIndex: 3),
                         ));
                   },
                   child: Container(

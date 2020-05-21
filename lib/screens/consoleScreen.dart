@@ -39,12 +39,13 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     myIndex = widget.consoleIndexValue;
 
     consoleName = Console.values[int.parse(myIndex)].toString();
+    print(consoleName);
 
     if (consoleName == 'Console.playstation') {
       consoleApiCode = ps4ApiCode;
     } else if (consoleName == 'Console.xbox') {
       consoleApiCode = xboxApiCode;
-    } else if (consoleName == 'Console.switch') {
+    } else if (consoleName == 'Console.nSwitch') {
       consoleApiCode = switchApiCode;
     } else if (consoleName == 'Console.pc') {
       consoleApiCode = pcApiCode;
@@ -57,9 +58,6 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     apiSearch = APISearch(platformCode: consoleApiCode, coverCode: 0);
     gameListByRating = await apiSearch.requestDataTopRated();
     gameListRecent = await apiSearch.requestDataLatest();
-
-    print(gameListByRating.length);
-    print(gameListRecent.length);
 
     addGameRatingDataToList();
     addGameRecentDataToList();
@@ -91,10 +89,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     print(gameListRecent.length);
     gameListRecent.forEach(
       (game) async {
-        print(game['name']);
         tempVar = await apiSearch.getCover(game['cover']);
-
-        print(tempVar == null ? tempVar : 'No Covers');
 
         if (tempVar.length != 0) {
           a = 'https://' +
@@ -124,7 +119,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        TopSearchBar(),
+        TopSearchBar(consoleIndex: consoleApiCode),
         SizedBox(
           height: 4,
         ),
@@ -167,7 +162,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                             width: 10,
                           ),
                           Text(
-                            "Exclusive Games",
+                            "Top Rated",
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -245,7 +240,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
                             width: 10,
                           ),
                           Text(
-                            "Exclusive Games",
+                            "Latest Games",
                             style: TextStyle(
                               color: Colors.white,
                             ),

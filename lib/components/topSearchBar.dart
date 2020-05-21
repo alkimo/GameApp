@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gamesapp/screens/TextSearchScreen.dart';
+import 'package:gamesapp/screens/SearchByTextScreen.dart';
 
 class TopSearchBar extends StatelessWidget {
+  TopSearchBar({this.consoleIndex});
+
+  var consoleIndex;
   double uniHeight = 40;
   final myController = TextEditingController();
 
@@ -25,9 +28,9 @@ class TopSearchBar extends StatelessWidget {
                       child: TextField(
                         controller: myController,
                         decoration: InputDecoration(
+                          border: OutlineInputBorder(),
                           hintText: 'Search games',
 //                                Add Console games here
-                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
@@ -50,8 +53,9 @@ class TopSearchBar extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                TextSearchScreen(input: myController.text),
+                            builder: (context) => SearchByTextSearchScreen(
+                                input: myController.text,
+                                consoleIndex: consoleIndex),
                           ),
                         );
                       },

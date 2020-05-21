@@ -4,12 +4,13 @@ import 'package:gamesapp/essential/constants.dart';
 import 'package:gamesapp/essential/apiKey.dart';
 
 class APISearch {
+  APISearch({this.platformCode, this.coverCode, this.searchString});
+
   var gameList;
   var stringURL;
+  var searchString;
   int platformCode;
   int coverCode;
-
-  APISearch({this.platformCode, this.coverCode});
 
   Future<List> requestDataTopRated() async {
     var response = await http.post(
@@ -56,6 +57,17 @@ class APISearch {
     );
 
     gameList = await jsonDecode(listResponse.body);
+    return gameList;
+  }
+
+  Future<List> requestDataByText() async {
+    var response = await http.post(
+      url,
+      headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
+      body:
+          'fields *; search \"$searchString\"; where platforms = ($platformCode) & version_parent = null; limit 50;',
+    );
+    gameList = await jsonDecode(response.body);
     return gameList;
   }
 

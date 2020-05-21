@@ -31,6 +31,8 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
   var a;
   var b;
 
+  var done = false;
+
   var tempVar;
 
   @override
@@ -81,6 +83,7 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
 
         setState(() {
           gameRatingCardList.add(b);
+          done = true;
         });
       },
     );
@@ -117,173 +120,178 @@ class _ConsoleScreenState extends State<ConsoleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        TopSearchBar(consoleIndex: consoleApiCode),
-        SizedBox(
-          height: 4,
-        ),
-        Expanded(
-          flex: 4,
-          child: CarouselSlider(
-            options: CarouselOptions(
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              height: double.infinity,
-              enableInfiniteScroll: true,
-              enlargeCenterPage: true,
-              viewportFraction: 0.3,
-            ),
-            items: gameRatingCardList.map((item) => item).toList(),
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Expanded(
-          flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return (done != true)
+        ? LoadingAnimation()
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              TopSearchBar(consoleIndex: consoleApiCode),
+              SizedBox(
+                height: 4,
+              ),
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                  child: FlatButton(
-                    color: Colors.redAccent,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchByButtonScreen(
-                                consoleIndex: consoleApiCode,
-                                buttonSearchIndex: 1),
-                          ));
-                    },
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Top Rated",
-                            style: TextStyle(
-                              color: Colors.white,
+                flex: 4,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 3),
+                    height: double.infinity,
+                    enableInfiniteScroll: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.3,
+                  ),
+                  items: gameRatingCardList.map((item) => item).toList(),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                        child: FlatButton(
+                          color: Colors.redAccent,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchByButtonScreen(
+                                      consoleIndex: consoleApiCode,
+                                      buttonSearchIndex: 1),
+                                ));
+                          },
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Top Rated",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                    Expanded(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                        child: FlatButton(
+                          color: Colors.redAccent,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchByButtonScreen(
+                                      consoleIndex: consoleApiCode,
+                                      buttonSearchIndex: 2),
+                                ));
+                          },
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Exclusive Games",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                  child: FlatButton(
-                    color: Colors.redAccent,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchByButtonScreen(
-                                consoleIndex: consoleApiCode,
-                                buttonSearchIndex: 2),
-                          ));
-                    },
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Exclusive Games",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                flex: 7,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    height: double.infinity,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: true,
+                    viewportFraction: 1,
+                    autoPlayInterval: Duration(seconds: 6),
                   ),
+                  items: gameRecentCardList.map((item) => item).toList(),
                 ),
               ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: FlatButton(
+                        color: Colors.redAccent,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SearchByButtonScreen(
+                                    consoleIndex: consoleApiCode,
+                                    buttonSearchIndex: 3),
+                              ));
+                        },
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 50, vertical: 3),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Latest Games",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              BottomGenreSelector(),
             ],
-          ),
-        ),
-        Expanded(
-          flex: 7,
-          child: CarouselSlider(
-            options: CarouselOptions(
-              autoPlay: true,
-              height: double.infinity,
-              enlargeCenterPage: true,
-              enableInfiniteScroll: true,
-              viewportFraction: 1,
-              autoPlayInterval: Duration(seconds: 6),
-            ),
-            items: gameRecentCardList.map((item) => item).toList(),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Expanded(
-                child: FlatButton(
-                  color: Colors.redAccent,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SearchByButtonScreen(
-                              consoleIndex: consoleApiCode,
-                              buttonSearchIndex: 3),
-                        ));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 3),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Latest Games",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        BottomGenreSelector(),
-      ],
-    );
+          );
   }
 }

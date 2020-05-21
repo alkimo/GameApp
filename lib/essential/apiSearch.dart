@@ -31,7 +31,7 @@ class APISearch {
       date,
       headers: {'user-key': kAPIKey, 'Content-Type': 'application/json'},
       body:
-          'fields *; where game.platforms = $platformCode & version_parent = null & game.cover != n & date < 1590030239 & date > $lastYear; limit 5;',
+          'fields *; where game.platforms = $platformCode & date < 1590030239 & date > $lastYear; limit 5;',
     );
 
     gameList = await jsonDecode(response.body);
@@ -102,7 +102,7 @@ class APISearch {
       String myIdListInStr;
       var lastYear = getTime();
       bodySearch =
-          'fields *; where game.platforms = {$platformCode} & version_parent = null & date > 1558396800 & date < 1590030239; limit 30; sort date desc;';
+          'fields *; where game.platforms = ($platformCode) & date > 1558396800 & date < 1590030239; limit 30; sort date desc;';
 
       response = await http.post(
         date,

@@ -31,7 +31,7 @@ class _SearchByTextSearchScreenState extends State<SearchByTextSearchScreen> {
   }
 
   void getTextSearchData(var apiRequest) async {
-    myRequest = await apiRequest.requestDataByButton();
+    myRequest = await apiRequest.requestDataByText();
 
     myRequest.forEach((game) async {
       gameCover = await apiRequest.getCover(game['cover']);
